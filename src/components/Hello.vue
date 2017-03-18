@@ -17,15 +17,37 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <div class="date" @click="showCalendarFn">
+        日期：{{date}}
+        
+    </div>
+    <calendar :show="showCalendar" @selectedDate="selectedDate"/>
   </div>
+  
 </template>
 
 <script>
+import Calendar from './Calendar.vue'
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      showCalendar: false,
+      date: '点击选择日期'
+    }
+  },
+  components: {
+    Calendar
+  },
+  methods: {
+    selectedDate (date){
+      this.date = date
+      this.showCalendar = false
+      console.log(this.date, this.showCalendar)
+    },
+    showCalendarFn(){
+      this.showCalendar=true,window.console.log('show')
     }
   }
 }
@@ -49,5 +71,9 @@ li {
 
 a {
   color: #42b983;
+}
+.date{
+  height: 50px;
+  line-height: 50px;
 }
 </style>
